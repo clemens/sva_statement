@@ -45,7 +45,7 @@ class ExplanationPart
     @entries = [
       ExplanationEntry::PreviousQuartersBalanceEntry.new(
         label: label,
-        amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
+        amount: convert_indented_amount(amount, content.matched.length)
       )
     ]
   end
@@ -59,7 +59,7 @@ class ExplanationPart
 
       @entries << ExplanationEntry::PaymentEntry.new(
         label: label,
-        amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
+        amount: convert_indented_amount(amount, content.matched.length)
       )
     end
   end
@@ -78,7 +78,7 @@ class ExplanationPart
         amount_owed: amount_owed,
         interest_rate: interest_rate,
         days: days,
-        amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
+        amount: convert_indented_amount(amount, content.matched.length)
       )
     end
   end

@@ -14,11 +14,11 @@ module Numbers
     BigDecimal.new(number.gsub(".", "").gsub(",", "."))
   end
 
-  def convert_indented_amount(amount, indentation, indentation_threshold)
+  def convert_indented_amount(amount, line_width)
     return 0 if amount.nil?
 
     amount = convert_number(amount)
-    amount = -amount if indentation.length < indentation_threshold
+    amount = -amount if line_width <= 102 # minimum line width with a positive number
     amount
   end
 

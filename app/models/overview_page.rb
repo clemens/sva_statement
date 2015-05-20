@@ -1,6 +1,4 @@
 class OverviewPage
-  INDENTATION_THRESHOLD = 75 # really?
-
   include Numbers
 
   def initialize(contents)
@@ -47,7 +45,7 @@ class OverviewPage
     contents.scan(ENTRY_REGEXP).map do |entry_text, indentation, amount|
       SummaryEntry.new(
         label: entry_text,
-        amount: convert_indented_amount(amount, indentation, INDENTATION_THRESHOLD)
+        amount: convert_indented_amount(amount, "#{entry_text}#{indentation}#{amount}".length)
       )
     end
   end
