@@ -58,10 +58,7 @@ RSpec.shared_examples "part: balance previous quarters" do
 
       expect(part.label).to eq expected_values["label"]
       expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry.new(
-          label: attributes["label"],
-          amount: attributes["amount"]
-        )
+        expected_entry = ExplanationEntry::PreviousQuartersBalanceEntry.new(attributes)
         entry = part.entries.detect { |entry| entry == expected_entry }
 
         expect(entry).to_not be_nil
@@ -74,15 +71,28 @@ RSpec.shared_examples "part: payments" do
   describe "part: payments" do
     it "reads the payments" do
       expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "payments" }
-
       part = statement.explanations.parts.detect { |part| part.type == "payments" }
 
       expect(part.label).to eq expected_values["label"]
       expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry.new(
-          label: attributes["label"],
-          amount: attributes["amount"]
-        )
+        expected_entry = ExplanationEntry::PaymentEntry.new(attributes)
+        entry = part.entries.detect { |entry| entry == expected_entry }
+
+        expect(entry).to_not be_nil
+      end
+    end
+  end
+end
+
+RSpec.shared_examples "part: late interest" do
+  describe "part: late interest" do
+    it "reads late interest entries" do
+      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "late_interest" }
+      part = statement.explanations.parts.detect { |part| part.type == "late_interest" }
+
+      expect(part.label).to eq expected_values["label"]
+      expected_values["entries"].each do |attributes|
+        expected_entry = ExplanationEntry::LateInterestEntry.new(attributes)
         entry = part.entries.detect { |entry| entry == expected_entry }
 
         expect(entry).to_not be_nil

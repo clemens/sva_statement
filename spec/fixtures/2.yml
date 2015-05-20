@@ -44,3 +44,29 @@
         -
           "label" : "24.03.2015 Zahlung"
           "amount" : 300.00
+
+    -
+      "type" : "late_interest"
+      "label" : "Verzugszinsen (VZ)"
+      "entries" :
+        -
+          "period_start" : "2015-01-24"
+          "period_end" : "2015-03-18"
+          "amount_owed" : 127.49
+          "interest_rate" : 7.88
+          "days" : 54
+          "amount" : -1.49
+        -
+          "period_start" : "2015-03-19"
+          "period_end" : "2015-03-23"
+          "amount_owed" : 1908.38
+          "interest_rate" : 7.88
+          "days" : 5
+          "amount" : -2.06
+        -
+          "period_start" : "2015-03-24"
+          "period_end" : "2015-04-24"
+          "amount_owed" : 1612.92
+          "interest_rate" : 7.88
+          "days" : 32
+          "amount" : -11.14

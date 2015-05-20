@@ -1,3 +1,5 @@
+# TODO move parse_xxx methods to their respective classes
+
 class ExplanationPart
   include Numbers
 
@@ -27,7 +29,7 @@ class ExplanationPart
     @label = content.scan(PARTS_REGEXP)
 
     @type = case @label
-    when /(Saldovortrag)/, /(Vorschreibung)/ then TYPES[$~[1]]
+    when /(Saldovortrag)/, /(Vorschreibung)/, /(Verzugszinsen)/ then TYPES[$~[1]]
     else TYPES[@label]
     end
 
@@ -41,7 +43,7 @@ class ExplanationPart
     indentation, amount = content.rest.match(/#{INDENTED_AMOUNT}/)[1,2]
 
     @entries = [
-      ExplanationEntry.new(
+      ExplanationEntry::PreviousQuartersBalanceEntry.new(
         label: label,
         amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
       )
@@ -55,8 +57,27 @@ class ExplanationPart
     while content.scan_until(regexp)
       label, indentation, amount = content.matched.match(regexp)[1..-1]
 
-      @entries << ExplanationEntry.new(
+      @entries << ExplanationEntry::PaymentEntry.new(
         label: label,
+        amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
+      )
+    end
+  end
+
+  def parse_late_interest(content)
+    @entries = []
+
+    regexp = /(?<period_start>#{Explanations::DATE}) bis (?<period_end>#{Explanations::DATE}) \/ (?:(?:(?<amount_owed>#{AMOUNT}) x (?<interest_rate>#{PERCENTAGE}) x (?<days>\d+) : 365)|(?<label>[\w-]+)) #{INDENTED_AMOUNT}/
+    while content.scan_until(regexp)
+      period_start, period_end, amount_owed, interest_rate, days, label, indentation, amount = content.matched.match(regexp)[1..-1]
+
+      @entries << ExplanationEntry::LateInterestEntry.new(
+        period_start: period_start,
+        period_end: period_end,
+        label: label,
+        amount_owed: amount_owed,
+        interest_rate: interest_rate,
+        days: days,
         amount: convert_indented_amount(amount, indentation, ExplanationEntry::INDENTATION_THRESHOLD)
       )
     end

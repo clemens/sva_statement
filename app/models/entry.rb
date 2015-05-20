@@ -1,11 +1,16 @@
 class Entry
-  attr_accessor :label, :amount
+  include Numbers
+
+  def self.attributes; [:amount]; end
+  attr_accessor *attributes # FIXME repetition
 
   def initialize(attributes = {})
-    attributes.symbolize_keys.slice(:label, :amount).each do |attribute, value|
+    attributes.symbolize_keys!
+
+    self.class.attributes.each do |attribute|
       raise ArgumentError unless respond_to?(attribute)
 
-      send("#{attribute}=", value)
+      send("#{attribute}=", attributes[attribute])
     end
   end
 
@@ -14,6 +19,14 @@ class Entry
   end
 
   def ==(other)
-    [label, amount] == [other.label, other.amount]
+    values = []
+    value = self.class.attributes.all? do |attribute|
+      values << [attribute, send(attribute), other.send(attribute), send(attribute) == other.send(attribute)]
+      send(attribute) == other.send(attribute)
+    end
+    values.insert(0, value)
+    # p values
+    # puts '-' * 100
+    value
   end
 end

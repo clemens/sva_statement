@@ -46,3 +46,22 @@
         -
           "label" : "letzter Vorschreibebetrag"
           "amount" : -9731.68
+
+    -
+      "type" : "late_interest"
+      "label" : "Verzugszinsen (VZ)"
+      "entries" :
+        -
+          "period_start" : "2015-01-24"
+          "period_end" : "2015-03-18"
+          "amount_owed" : 2022.88
+          "interest_rate" : 7.88
+          "days" : 54
+          "amount" : -23.59
+        -
+          "period_start" : "2015-03-19"
+          "period_end" : "2015-04-24"
+          "amount_owed" : 3722.80
+          "interest_rate" : 7.88
+          "days" : 37
+          "amount" : -29.74

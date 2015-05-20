@@ -9,6 +9,7 @@ module Numbers
 
   def convert_number(number)
     return 0 if number.nil?
+    return number if number.is_a?(Numeric)
 
     BigDecimal.new(number.gsub(".", "").gsub(",", "."))
   end
