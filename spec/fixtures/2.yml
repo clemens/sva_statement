@@ -1,0 +1,29 @@
+"name" : "Max Müllermann"
+"social_security_number" : "0002 030303"
+"year" : 2015
+"quarter" : 2
+"account_balance_overview" :
+  "balance_from_previous_quarters" :
+    "amount" : -1746.19
+    "entries" :
+      -
+        "label" : "Saldovortrag vom 24.01.2015"
+        "amount" : -2441.42
+      -
+        "label" : "Zahlungen"
+        "amount" : 300.00
+      -
+        "label" : "Berichtigung 2015"
+        "amount" : 409.92
+      -
+        "label" : "Verzugszinsen"
+        "amount" : -14.69
+  "prepayment" :
+    "amount" : -1849.74
+    "entries" :
+      -
+        "label" : "Vorschreibung 2. Quartal 2015"
+        "amount" : -1272.30
+      -
+        "label" : "Berichtigung 2012"
+        "amount" : -577.44

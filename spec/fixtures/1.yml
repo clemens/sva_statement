@@ -1,0 +1,23 @@
+"name" : "Martina Musterfrau"
+"social_security_number" : "0001 020202"
+"year" : 2015
+"quarter" : 2
+"account_balance_overview" :
+  "balance_from_previous_quarters" :
+    "amount" : -13.44
+    "entries" :
+      -
+        "label" : "Saldovortrag vom 24.01.2015"
+        "amount" : -13.44
+  "prepayment" :
+    "amount" : -46.35
+    "entries" :
+      -
+        "label" : "Vorschreibung 2. Quartal 2015"
+        "amount" : -473.28
+      -
+        "label" : "Kostenanteile"
+        "amount" : -3.57
+      -
+        "label" : "Berichtigung 2015"
+        "amount" : 430.50

@@ -1,0 +1,38 @@
+"name" : "Herbert Traunsteiner"
+"social_security_number" : "0003 040404"
+"year" : 2015
+"quarter" : 2
+"account_balance_overview" :
+  "balance_from_previous_quarters" :
+    "amount" : -4110.19
+    "entries" :
+      -
+        "label" : "Saldovortrag vom 24.01.2015"
+        "amount" : -9731.68
+      -
+        "label" : "Geldleistungen"
+        "amount" : 19.20
+      -
+        "label" : "Berichtigung 2012"
+        "amount" : 2372.04
+      -
+        "label" : "Berichtigung 2015"
+        "amount" : 3382.77
+      -
+        "label" : "Verzugszinsen"
+        "amount" : -53.33
+      -
+        "label" : "Mahn-/Exekutionskosten"
+        "amount" : -99.19
+  "prepayment" :
+    "amount" : -2176.95
+    "entries" :
+      -
+        "label" : "Vorschreibung 2. Quartal 2015"
+        "amount" : -1148.88
+      -
+        "label" : "Kostenanteile"
+        "amount" : -414.99
+      -
+        "label" : "Berichtigung 2012"
+        "amount" : -613.08

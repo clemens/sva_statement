@@ -1,0 +1,20 @@
+"name" : "Esther Duck"
+"social_security_number" : "0005 060606"
+"year" : 2015
+"quarter" : 2
+"account_balance_overview" :
+  "balance_from_previous_quarters" :
+    "amount" : 0.00
+    "entries" :
+      -
+        "label" : "Saldovortrag vom 24.01.2015"
+        "amount" : -561.33
+      -
+        "label" : "Zahlungen"
+        "amount" : 561.33
+  "prepayment" :
+    "amount" : -561.33
+    "entries" :
+      -
+        "label" : "Vorschreibung 2. Quartal 2015"
+        "amount" : -561.33

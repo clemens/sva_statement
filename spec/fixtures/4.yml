@@ -1,0 +1,32 @@
+"name" : "Bartholomäus Speed"
+"social_security_number" : "0004 050505"
+"year" : 2015
+"quarter" : 2
+"account_balance_overview" :
+  "balance_from_previous_quarters" :
+    "amount" : -3.12
+    "entries" :
+      -
+        "label" : "Saldovortrag vom 24.01.2015"
+        "amount" : -4834.83
+      -
+        "label" : "Zahlungen"
+        "amount" : 3921.59
+      -
+        "label" : "Berichtigung 2015"
+        "amount" : 933.27
+      -
+        "label" : "Verzugszinsen"
+        "amount" : -22.15
+      -
+        "label" : "Mahnkosten"
+        "amount" : -1.00
+  "prepayment" :
+    "amount" : -2486.13
+    "entries" :
+      -
+        "label" : "Vorschreibung 2. Quartal 2015"
+        "amount" : -1410.69
+      -
+        "label" : "Berichtigung 2012"
+        "amount" : -1075.44
