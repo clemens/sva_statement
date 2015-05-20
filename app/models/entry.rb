@@ -3,6 +3,8 @@ class Entry
 
   def initialize(attributes = {})
     attributes.symbolize_keys.slice(:label, :amount).each do |attribute, value|
+      raise ArgumentError unless respond_to?(attribute)
+
       send("#{attribute}=", value)
     end
   end

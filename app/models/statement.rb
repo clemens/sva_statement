@@ -9,6 +9,8 @@ class Statement
   def_delegators :@explanations,
     :name, :social_security_number
 
+  attr_reader :explanations
+
   def self.from_file(pdf)
     output_filename = Rails.root.join("tmp", File.basename(pdf.to_s, ".pdf") + ".txt")
     `pdftotext -enc UTF-8 -table #{pdf} #{output_filename}`
@@ -22,6 +24,7 @@ class Statement
     overview_page_text = contents.slice(0..contents.index("$$$new_sheet$$$"))
     @overview_page = OverviewPage.new(overview_page_text)
 
+    # FIXME explanations part should end with the last amount found in the overview
     explanations_text = contents.slice(contents.slice(0..contents.index("Erklärungen zum Kontoauszug vom")).rindex("$$$new_sheet$$$")..contents.index("Zahlungseingänge berücksichtigt bis"))
     @explanations = Explanations.new(explanations_text)
   end

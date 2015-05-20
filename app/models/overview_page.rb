@@ -45,7 +45,10 @@ class OverviewPage
 
   def read_entries(contents)
     contents.scan(ENTRY_REGEXP).map do |entry_text, indentation, amount|
-      Entry.new(label: entry_text, amount: convert_indented_amount(amount, indentation, INDENTATION_THRESHOLD))
+      SummaryEntry.new(
+        label: entry_text,
+        amount: convert_indented_amount(amount, indentation, INDENTATION_THRESHOLD)
+      )
     end
   end
 

@@ -2,6 +2,7 @@
 "social_security_number" : "0005 060606"
 "year" : 2015
 "quarter" : 2
+
 "account_balance_overview" :
   "balance_from_previous_quarters" :
     "amount" : 0.00
@@ -18,3 +19,20 @@
       -
         "label" : "Vorschreibung 2. Quartal 2015"
         "amount" : -561.33
+
+"explanations":
+  "parts" :
+    -
+      "type" : "balance_from_previous_quarters"
+      "label" : "Saldovortrag vom 24.01.2015"
+      "entries" :
+        -
+          "label" : "letzter Vorschreibebetrag"
+          "amount" : -561.33
+    -
+      "type" : "payments"
+      "label" : "Zahlungen"
+      "entries" :
+        -
+          "label" : "11.02.2015 Zahlung"
+          "amount" : 561.33

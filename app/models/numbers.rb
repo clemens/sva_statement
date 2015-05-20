@@ -1,6 +1,7 @@
 module Numbers
   AMOUNT = "(?:\\d{1,3}\\.)*\\d{1,3},\\d{2}"
   PERCENTAGE = "(?:\\d{1,2},\\d{2}) %"
+  INDENTED_AMOUNT = "(?<indentation>\\D+)(?<amount>#{AMOUNT})" # like amount, but with sign depending on indentation
   ENTRY_REGEXP = /(?<entry_text>#{["Saldovortrag vom \\d{1,2}\.\\d{1,2}.\\d{4}", "Vorschreibung \\d. Quartal \\d{4}", "Kostenanteile", "Berichtigung \\d{4}", "Geldleistungen", "Mahn-/Exekutionskosten", "Verzugszinsen", "Mahnkosten", "Zahlungen"].join("|")})(?<indentation>\s+)(?<amount>#{AMOUNT})/
   AMOUNT_REGEXP = /#{AMOUNT}/ # amount of any size with thousands separator and 2 decimal places
   SIGNED_AMOUNT_REGEXP = /(?:[+-])#{AMOUNT}/ # like above, but signed

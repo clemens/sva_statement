@@ -36,3 +36,13 @@
       -
         "label" : "Berichtigung 2012"
         "amount" : -613.08
+
+"explanations":
+  "parts" :
+    -
+      "type" : "balance_from_previous_quarters"
+      "label" : "Saldovortrag vom 24.01.2015"
+      "entries" :
+        -
+          "label" : "letzter Vorschreibebetrag"
+          "amount" : -9731.68

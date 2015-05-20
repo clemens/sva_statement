@@ -1,0 +1,2 @@
+class SummaryEntry < Entry
+end
