@@ -45,10 +45,12 @@
       "label" : "Zahlungen"
       "entries" :
         -
-          "label" : "10.02.2015 Zahlung"
+          "date" : "2015-02-10"
+          "label" : "Zahlung"
           "amount" : 1415.43
         -
-          "label" : "22.04.2015 Zahlung"
+          "date" : "2015-04-22"
+          "label" : "Zahlung"
           "amount" : 2506.16
 
     -

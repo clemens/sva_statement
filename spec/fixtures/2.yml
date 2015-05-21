@@ -42,7 +42,8 @@
       "label" : "Zahlungen"
       "entries" :
         -
-          "label" : "24.03.2015 Zahlung"
+          "date" : "2015-03-24"
+          "label" : "Zahlung"
           "amount" : 300.00
 
     -

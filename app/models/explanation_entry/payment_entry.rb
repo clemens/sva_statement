@@ -1,14 +1,16 @@
 class ExplanationEntry::PaymentEntry < ExplanationEntry
   string_attributes :label
+  date_attributes :date
 
   def self.parse_entries(content)
     entries = []
 
-    regexp = /(?<label>#{Explanations::DATE} Zahlung)#{INDENTED_AMOUNT}/
+    regexp = /(?<date>#{Explanations::DATE})\s(?<label>Zahlung)#{INDENTED_AMOUNT}/
     while content.scan_until(regexp)
-      label, indentation, amount = content.matched.match(regexp)[1..-1]
+      date, label, indentation, amount = content.matched.match(regexp)[1..-1]
 
       entries << new(
+        date: date,
         label: label,
         amount: convert_indented_amount(amount, content.matched.length)
       )
