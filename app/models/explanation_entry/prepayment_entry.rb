@@ -6,18 +6,13 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
   def self.attributes; super + ADDITIONAL_ATTRIBUTES; end
   attr_accessor *ADDITIONAL_ATTRIBUTES
 
-  def self.elements
-    ["Unfallversicherung (UV)", "Pensionsversicherung (PV)", "Krankenversicherung (KV)", "Selbständigenvorsorge (SeVo)"]
-  end
-
-  def self.labels
-    ["UV-Beitrag ASVG", "PV-Beitrag GSVG", "KV-Beitrag", "KV-Zusatzversicherungsbeitrag", "SeVo-Beitrag PFLICHT"]
-  end
+  ELEMENTS = ["Unfallversicherung (UV)", "Pensionsversicherung (PV)", "Krankenversicherung (KV)", "Selbständigenvorsorge (SeVo)"]
+  LABELS = ["UV-Beitrag ASVG", "PV-Beitrag GSVG", "KV-Beitrag", "KV-Zusatzversicherungsbeitrag", "SeVo-Beitrag PFLICHT"]
 
   def self.parse_entries(content)
     entries = []
 
-    found_elements = content.string.scan(/#{elements.map { |element| Regexp.escape(element) }.join("|")}/)
+    found_elements = content.string.scan(/#{ELEMENTS.map { |element| Regexp.escape(element) }.join("|")}/)
 
     # jump to the first element
     content.skip_until(/#{Regexp.escape(found_elements.first)}/)
@@ -29,7 +24,7 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
     element_contents.each do |element_content|
       content = StringScanner.new(element_content)
 
-      label_regexp = /(?<label>#{labels.join("|")})\s{2,}/ # look for at least two spaces after the label so we don't match inside a paragraph of text
+      label_regexp = /(?<label>#{LABELS.join("|")})\s{2,}/ # look for at least two spaces after the label so we don't match inside a paragraph of text
       period_regexp = /(?<period_start>#{Explanations::DATE}) bis (?<period_end>#{Explanations::DATE})/
       amount_line_regexp = /(?:(?:(?<assessment_basis>#{AMOUNT}) x (?<rate>#{PERCENTAGE}))|Monatsbeitrag) = (?<monthly_amount>#{AMOUNT}) x (?<months>\d+) Monate? #{INDENTED_AMOUNT}/
 
