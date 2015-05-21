@@ -46,6 +46,7 @@
           "period_start" : "2015-04-01"
           "period_end" : "2015-06-30"
           "monthly_amount" : 8.90
+          "months" : 3
           "amount" : -26.70
         -
           "label" : "PV-Beitrag GSVG"
@@ -54,6 +55,7 @@
           "assessment_basis" : 537.78
           "rate" : 18.50
           "monthly_amount" : 99.49
+          "months" : 3
           "amount" : -298.47
         -
           "label" : "KV-Beitrag"
@@ -62,6 +64,7 @@
           "assessment_basis" : 537.78
           "rate" : 7.65
           "monthly_amount" : 41.14
+          "months" : 3
           "amount" : -123.42
         -
           "label" : "KV-Zusatzversicherungsbeitrag"
@@ -70,6 +73,7 @@
           "assessment_basis" : 1173.93
           "rate" : 2.50
           "monthly_amount" : 29.35
+          "months" : 3
           "amount" : -88.05
         -
           "label" : "SeVo-Beitrag PFLICHT"
@@ -78,4 +82,5 @@
           "assessment_basis" : 537.78
           "rate" : 1.53
           "monthly_amount" : 8.23
+          "months" : 3
           "amount" : -24.69

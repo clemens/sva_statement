@@ -1,7 +1,7 @@
 # FIXME unify handling for dates and numbers
 
 class ExplanationEntry::PrepaymentEntry < ExplanationEntry
-  ADDITIONAL_ATTRIBUTES = [:label, :period_start, :period_end, :assessment_basis, :rate, :monthly_amount]
+  ADDITIONAL_ATTRIBUTES = [:label, :period_start, :period_end, :assessment_basis, :rate, :monthly_amount, :months]
 
   def self.attributes; super + ADDITIONAL_ATTRIBUTES; end
   attr_accessor *ADDITIONAL_ATTRIBUTES
@@ -31,7 +31,7 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
 
       label_regexp = /(?<label>#{labels.join("|")})\s{2,}/ # look for at least two spaces after the label so we don't match inside a paragraph of text
       period_regexp = /(?<period_start>#{Explanations::DATE}) bis (?<period_end>#{Explanations::DATE})/
-      amount_line_regexp = /(?:(?:(?<assessment_basis>#{AMOUNT}) x (?<rate>#{PERCENTAGE}))|Monatsbeitrag) = (?<monthly_amount>#{AMOUNT}) x \d+ Monate? #{INDENTED_AMOUNT}/
+      amount_line_regexp = /(?:(?:(?<assessment_basis>#{AMOUNT}) x (?<rate>#{PERCENTAGE}))|Monatsbeitrag) = (?<monthly_amount>#{AMOUNT}) x (?<months>\d+) Monate? #{INDENTED_AMOUNT}/
 
       # always scan until the next label, then scan for all the attributes
       while content.scan_until(label_regexp)
@@ -39,7 +39,7 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
         content.scan_until(period_regexp)
         period_start, period_end = content.matched.match(period_regexp)[1..-1]
         content.scan_until(amount_line_regexp)
-        assessment_basis, rate, monthly_amount, indentation, amount = content.matched.match(amount_line_regexp)[1..-1]
+        assessment_basis, rate, monthly_amount, months, indentation, amount = content.matched.match(amount_line_regexp)[1..-1]
         last_line_length = content.matched.length
 
         entries << new(
@@ -49,6 +49,7 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
           assessment_basis: assessment_basis,
           rate: rate,
           monthly_amount: monthly_amount,
+          months: months,
           amount: convert_indented_amount(amount, last_line_length)
         )
       end
@@ -79,5 +80,9 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
 
   def monthly_amount=(monthly_amount)
     @monthly_amount = convert_number(monthly_amount)
+  end
+
+  def months=(months)
+    @months = months.to_i
   end
 end
