@@ -49,6 +49,7 @@ RSpec.shared_examples "general data" do
   end
 end
 
+# FIXME essentially the same code for all of them
 RSpec.shared_examples "part: balance previous quarters" do
   describe "part: balance previous quarters" do
     it "reads the balance from the previous quarter" do
@@ -93,6 +94,23 @@ RSpec.shared_examples "part: late interest" do
       expect(part.label).to eq expected_values["label"]
       expected_values["entries"].each do |attributes|
         expected_entry = ExplanationEntry::LateInterestEntry.new(attributes)
+        entry = part.entries.detect { |entry| entry == expected_entry }
+
+        expect(entry).to_not be_nil
+      end
+    end
+  end
+end
+
+RSpec.shared_examples "part: collection expenses" do
+  describe "part: collection expenses" do
+    it "reads collection expenses entries" do
+      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "collection_expenses" }
+      part = statement.explanations.parts.detect { |part| part.type == "collection_expenses" }
+
+      expect(part.label).to eq expected_values["label"]
+      expected_values["entries"].each do |attributes|
+        expected_entry = ExplanationEntry::CollectionExpensesEntry.new(attributes)
         entry = part.entries.detect { |entry| entry == expected_entry }
 
         expect(entry).to_not be_nil

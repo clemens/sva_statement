@@ -12,8 +12,7 @@ class ExplanationPart
     "Vorschreibung" => "prepayment",
     "Berichtigung" => "adjustment",
     "Verzugszinsen" => "late_interest",
-    "Mahnkosten" => "collection_expensions",
-    "Mahn-/Exekutionskosten" => "distraint_expenses"
+    "Mahnkosten" => "collection_expenses"
   }
 
   attr_reader :type, :label, :entries
@@ -30,7 +29,9 @@ class ExplanationPart
 
     @type = case @label
     when /(Saldovortrag)/, /(Vorschreibung)/, /(Verzugszinsen)/ then TYPES[$~[1]]
-    else TYPES[@label]
+    when /Mahn/ then TYPES["Mahnkosten"]
+    else
+      TYPES[@label] ? TYPES[@label] : raise("unknown type for label: #{@label}")
     end
 
     send("parse_#{type}", content) if respond_to?("parse_#{type}")
@@ -78,6 +79,24 @@ class ExplanationPart
         amount_owed: amount_owed,
         interest_rate: interest_rate,
         days: days,
+        amount: convert_indented_amount(amount, content.matched.length)
+      )
+    end
+  end
+
+  def parse_collection_expenses(content)
+    @entries = []
+
+    # are these all?
+    labels = ["Mahngebühr", "Barauslagen bei Exekution", "Exekutionsgebühren", "Pauschalgebühren für Exekutionsantrag"]
+
+    regexp = /(?<date>#{Explanations::DATE}) (?<label>(?:#{labels.join("|")})) #{INDENTED_AMOUNT}/
+    while content.scan_until(regexp)
+      date, label, indentation, amount = content.matched.match(regexp)[1..-1]
+
+      @entries << ExplanationEntry::CollectionExpensesEntry.new(
+        date: date,
+        label: label,
         amount: convert_indented_amount(amount, content.matched.length)
       )
     end

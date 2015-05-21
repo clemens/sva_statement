@@ -65,3 +65,24 @@
           "interest_rate" : 7.88
           "days" : 37
           "amount" : -29.74
+
+    -
+      "type" : "collection_expenses"
+      "label" : "Mahn-/Exekutionskosten"
+      "entries" :
+        -
+          "date" : "2015-03-19"
+          "label" : "Mahngebühr"
+          "amount" : -1.00
+        -
+          "date" : "2015-04-25"
+          "label" : "Barauslagen bei Exekution"
+          "amount" : -3.63
+        -
+          "date" : "2015-04-25"
+          "label" : "Exekutionsgebühren"
+          "amount" : -20.06
+        -
+          "date" : "2015-04-25"
+          "label" : "Pauschalgebühren für Exekutionsantrag"
+          "amount" : -74.50
