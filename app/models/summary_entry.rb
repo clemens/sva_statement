@@ -1,4 +1,3 @@
 class SummaryEntry < Entry
-  def self.attributes; super + [:label]; end
-  attr_accessor :label
+  string_attributes :label
 end

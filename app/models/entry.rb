@@ -1,8 +1,8 @@
 class Entry
   include Numbers
+  extend AttributeMethods
 
-  def self.attributes; [:amount]; end
-  attr_accessor *attributes # FIXME repetition
+  number_attributes :amount
 
   def initialize(attributes = {})
     attributes.symbolize_keys!

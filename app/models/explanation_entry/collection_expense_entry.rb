@@ -1,6 +1,5 @@
 class ExplanationEntry::CollectionExpenseEntry < ExplanationEntry
-  def self.attributes; super + [:label]; end
-  attr_accessor :label
+  string_attributes :label
 
   def self.parse_entries(content)
     entries = []

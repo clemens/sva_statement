@@ -1,10 +1,8 @@
-# FIXME unify handling for dates and numbers
-
 class ExplanationEntry::PrepaymentEntry < ExplanationEntry
-  ADDITIONAL_ATTRIBUTES = [:label, :period_start, :period_end, :assessment_basis, :rate, :monthly_amount, :months]
-
-  def self.attributes; super + ADDITIONAL_ATTRIBUTES; end
-  attr_accessor *ADDITIONAL_ATTRIBUTES
+  string_attributes :label
+  date_attributes :period_start, :period_end
+  number_attributes :assessment_basis, :rate, :monthly_amount
+  integer_attributes :months
 
   ELEMENTS = ["Unfallversicherung (UV)", "Pensionsversicherung (PV)", "Krankenversicherung (KV)", "Selbständigenvorsorge (SeVo)"]
   LABELS = ["UV-Beitrag ASVG", "PV-Beitrag GSVG", "KV-Beitrag", "KV-Zusatzversicherungsbeitrag", "SeVo-Beitrag PFLICHT"]
@@ -51,33 +49,5 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
     end
 
     entries
-  end
-
-  def period_start=(period_start)
-    @period_start = if period_start.present?
-      period_start.respond_to?(:strftime) ? period_start : Date.parse(period_start)
-    end
-  end
-
-  def period_end=(period_end)
-    @period_end = if period_end.present?
-      period_end.respond_to?(:strftime) ? period_end : Date.parse(period_end)
-    end
-  end
-
-  def assessment_basis=(assessment_basis)
-    @assessment_basis = convert_number(assessment_basis)
-  end
-
-  def rate=(rate)
-    @rate = convert_number(rate)
-  end
-
-  def monthly_amount=(monthly_amount)
-    @monthly_amount = convert_number(monthly_amount)
-  end
-
-  def months=(months)
-    @months = months.to_i
   end
 end
