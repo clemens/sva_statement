@@ -11,16 +11,17 @@ module Numbers
 
   def convert_number(number)
     return 0 if number.nil?
-    return number if number.is_a?(Numeric)
+    return number if number.is_a?(BigDecimal)
 
-    BigDecimal.new(number.gsub(".", "").gsub(",", "."))
+    number = number.gsub(".", "").gsub(",", ".") unless number.is_a?(Numeric)
+    number.to_d
   end
 
   def convert_indented_amount(amount, line_width)
     return 0 if amount.nil?
 
     amount = convert_number(amount)
-    amount = -amount if line_width <= 102 # minimum line width with a positive number
+    amount = -amount if line_width <= 108 # minimum line width with a positive number
     amount
   end
 

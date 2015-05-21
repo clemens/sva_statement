@@ -5,6 +5,6 @@ RSpec.describe "Results for PDF 2" do
 
   include_examples "general data"
 
-  @parts = %w[balance_from_previous_quarters payments late_interest]
+  @parts = %w[balance_from_previous_quarters payments late_interest prepayment]
   include_examples "parts"
 end

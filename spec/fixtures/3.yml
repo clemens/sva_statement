@@ -86,3 +86,38 @@
           "date" : "2015-04-25"
           "label" : "Pauschalgebühren für Exekutionsantrag"
           "amount" : -74.50
+
+    -
+      "type" : "prepayment"
+      "label" : "Vorschreibung 2. Quartal 2015"
+      "entries" :
+        -
+          "label" : "UV-Beitrag ASVG"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "monthly_amount" : 8.90
+          "amount" : -26.70
+        -
+          "label" : "PV-Beitrag GSVG"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1351.37
+          "rate" : 18.50
+          "monthly_amount" : 250.00
+          "amount" : -750.00
+        -
+          "label" : "KV-Beitrag"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1351.37
+          "rate" : 7.65
+          "monthly_amount" : 103.38
+          "amount" : -310.14
+        -
+          "label" : "SeVo-Beitrag PFLICHT"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1351.37
+          "rate" : 1.53
+          "monthly_amount" : 20.68
+          "amount" : -62.04

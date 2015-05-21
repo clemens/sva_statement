@@ -90,3 +90,38 @@
           "date" : "2015-03-19"
           "label" : "Mahngebühr"
           "amount" : -1.00
+
+    -
+      "type" : "prepayment"
+      "label" : "Vorschreibung 2. Quartal 2015"
+      "entries" :
+        -
+          "label" : "UV-Beitrag ASVG"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "monthly_amount" : 8.90
+          "amount" : -26.70
+        -
+          "label" : "PV-Beitrag GSVG"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1666.67
+          "rate" : 18.50
+          "monthly_amount" : 308.33
+          "amount" : -924.99
+        -
+          "label" : "KV-Beitrag"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1666.67
+          "rate" : 7.65
+          "monthly_amount" : 127.50
+          "amount" : -382.50
+        -
+          "label" : "SeVo-Beitrag PFLICHT"
+          "period_start" : "2015-04-01"
+          "period_end" : "2015-06-30"
+          "assessment_basis" : 1666.67
+          "rate" : 1.53
+          "monthly_amount" : 25.50
+          "amount" : -76.50
