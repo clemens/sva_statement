@@ -53,16 +53,19 @@ RSpec.shared_examples "parts" do
   @parts.each do |part_identifier|
     describe "part: #{part_identifier}" do
       it "reads the #{part_identifier} entries" do
-        expected_values = values["explanations"]["parts"].detect { |part| part["type"] == part_identifier }
+        expected_parts_values = values["explanations"]["parts"].select { |part| part["type"] == part_identifier }
 
-        part = statement.explanations.parts.detect { |part| part.type == part_identifier }
+        expected_parts_values.each do |expected_part_values|
+          part = statement.explanations.parts.detect do |part|
+            part.type == part_identifier &&
+            part.label == expected_part_values["label"] &&
+            expected_part_values["entries"].all? { |attributes|
+              expected_entry = ExplanationEntry.const_get("#{part_identifier.singularize.camelize}Entry").new(attributes)
+              entry = part.entries.detect { |entry| entry == expected_entry }
+            }
+          end
 
-        expect(part.label).to eq expected_values["label"]
-        expected_values["entries"].each do |attributes|
-          expected_entry = ExplanationEntry.const_get("#{part_identifier.singularize.camelize}Entry").new(attributes)
-          entry = part.entries.detect { |entry| entry == expected_entry }
-
-          expect(entry).to_not be_nil
+          expect(part).to_not be_nil
         end
       end
     end
