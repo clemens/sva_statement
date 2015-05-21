@@ -4,5 +4,7 @@ RSpec.describe "Results for PDF 1" do
   let(:file) { "1.pdf" }
 
   include_examples "general data"
-  include_examples "part: balance previous quarters"
+
+  @parts = %w[balance_from_previous_quarters]
+  include_examples "parts"
 end

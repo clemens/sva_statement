@@ -49,71 +49,21 @@ RSpec.shared_examples "general data" do
   end
 end
 
-# FIXME essentially the same code for all of them
-RSpec.shared_examples "part: balance previous quarters" do
-  describe "part: balance previous quarters" do
-    it "reads the balance from the previous quarter" do
-      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "balance_from_previous_quarters" }
+RSpec.shared_examples "parts" do
+  @parts.each do |part_identifier|
+    describe "part: #{part_identifier}" do
+      it "reads the #{part_identifier} entries" do
+        expected_values = values["explanations"]["parts"].detect { |part| part["type"] == part_identifier }
 
-      part = statement.explanations.parts.detect { |part| part.type == "balance_from_previous_quarters" }
+        part = statement.explanations.parts.detect { |part| part.type == part_identifier }
 
-      expect(part.label).to eq expected_values["label"]
-      expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry::PreviousQuartersBalanceEntry.new(attributes)
-        entry = part.entries.detect { |entry| entry == expected_entry }
+        expect(part.label).to eq expected_values["label"]
+        expected_values["entries"].each do |attributes|
+          expected_entry = ExplanationEntry.const_get("#{part_identifier.singularize.camelize}Entry").new(attributes)
+          entry = part.entries.detect { |entry| entry == expected_entry }
 
-        expect(entry).to_not be_nil
-      end
-    end
-  end
-end
-
-RSpec.shared_examples "part: payments" do
-  describe "part: payments" do
-    it "reads the payments" do
-      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "payments" }
-      part = statement.explanations.parts.detect { |part| part.type == "payments" }
-
-      expect(part.label).to eq expected_values["label"]
-      expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry::PaymentEntry.new(attributes)
-        entry = part.entries.detect { |entry| entry == expected_entry }
-
-        expect(entry).to_not be_nil
-      end
-    end
-  end
-end
-
-RSpec.shared_examples "part: late interest" do
-  describe "part: late interest" do
-    it "reads late interest entries" do
-      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "late_interest" }
-      part = statement.explanations.parts.detect { |part| part.type == "late_interest" }
-
-      expect(part.label).to eq expected_values["label"]
-      expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry::LateInterestEntry.new(attributes)
-        entry = part.entries.detect { |entry| entry == expected_entry }
-
-        expect(entry).to_not be_nil
-      end
-    end
-  end
-end
-
-RSpec.shared_examples "part: collection expenses" do
-  describe "part: collection expenses" do
-    it "reads collection expenses entries" do
-      expected_values = values["explanations"]["parts"].detect { |part| part["type"] == "collection_expenses" }
-      part = statement.explanations.parts.detect { |part| part.type == "collection_expenses" }
-
-      expect(part.label).to eq expected_values["label"]
-      expected_values["entries"].each do |attributes|
-        expected_entry = ExplanationEntry::CollectionExpensesEntry.new(attributes)
-        entry = part.entries.detect { |entry| entry == expected_entry }
-
-        expect(entry).to_not be_nil
+          expect(entry).to_not be_nil
+        end
       end
     end
   end

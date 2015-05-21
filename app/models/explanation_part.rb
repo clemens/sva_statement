@@ -44,7 +44,7 @@ class ExplanationPart
     indentation, amount = content.rest.match(/#{INDENTED_AMOUNT}/)[1,2]
 
     @entries = [
-      ExplanationEntry::PreviousQuartersBalanceEntry.new(
+      ExplanationEntry::BalanceFromPreviousQuarterEntry.new(
         label: label,
         amount: convert_indented_amount(amount, content.matched.length)
       )
@@ -94,7 +94,7 @@ class ExplanationPart
     while content.scan_until(regexp)
       date, label, indentation, amount = content.matched.match(regexp)[1..-1]
 
-      @entries << ExplanationEntry::CollectionExpensesEntry.new(
+      @entries << ExplanationEntry::CollectionExpenseEntry.new(
         date: date,
         label: label,
         amount: convert_indented_amount(amount, content.matched.length)
