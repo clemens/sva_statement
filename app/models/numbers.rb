@@ -1,4 +1,6 @@
 module Numbers
+  def self.included(klass); klass.extend(self); end
+
   AMOUNT = "(?:\\d{1,3}\\.)*\\d{1,3},\\d{2}"
   PERCENTAGE = "(?:\\d{1,2},\\d{2}) %"
   INDENTED_AMOUNT = "(?<indentation>\\D+)(?<amount>#{AMOUNT})" # like amount, but with sign depending on indentation

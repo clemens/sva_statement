@@ -19,14 +19,8 @@ class Entry
   end
 
   def ==(other)
-    values = []
-    value = self.class.attributes.all? do |attribute|
-      values << [attribute, send(attribute), other.send(attribute), send(attribute) == other.send(attribute)]
+    self.class.attributes.all? do |attribute|
       send(attribute) == other.send(attribute)
     end
-    values.insert(0, value)
-    # p values
-    # puts '-' * 100
-    value
   end
 end
