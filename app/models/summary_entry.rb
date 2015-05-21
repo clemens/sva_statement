@@ -1,3 +1,3 @@
 class SummaryEntry < Entry
-  string_attributes :label
+  attribute :label, String
 end

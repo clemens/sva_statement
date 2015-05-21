@@ -1,8 +1,10 @@
 class ExplanationEntry::LateInterestEntry < ExplanationEntry
-  string_attributes :label
-  date_attributes :period_start, :period_end
-  number_attributes :amount_owed, :interest_rate
-  integer_attributes :days
+  attribute :label, String
+  attribute :period_start, Date
+  attribute :period_end, Date
+  attribute :amount_owed, Decimal
+  attribute :interest_rate, Decimal
+  attribute :days, Integer
 
   def self.parse_entries(content)
     entries = []
@@ -15,8 +17,8 @@ class ExplanationEntry::LateInterestEntry < ExplanationEntry
         period_start: period_start,
         period_end: period_end,
         label: label,
-        amount_owed: amount_owed,
-        interest_rate: interest_rate,
+        amount_owed: amount_owed ? convert_number(amount_owed) : nil,
+        interest_rate: interest_rate ? convert_number(interest_rate) : nil,
         days: days,
         amount: convert_indented_amount(amount, content.matched.length)
       )

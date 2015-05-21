@@ -1,5 +1,5 @@
 class ExplanationEntry::CollectionExpenseEntry < ExplanationEntry
-  string_attributes :label
+  attribute :label, String
 
   def self.parse_entries(content)
     entries = []

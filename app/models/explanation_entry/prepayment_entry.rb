@@ -1,8 +1,11 @@
 class ExplanationEntry::PrepaymentEntry < ExplanationEntry
-  string_attributes :label
-  date_attributes :period_start, :period_end
-  number_attributes :assessment_basis, :rate, :monthly_amount
-  integer_attributes :months
+  attribute :label, String
+  attribute :period_start, Date
+  attribute :period_end, Date
+  attribute :assessment_basis, Decimal
+  attribute :rate, Decimal
+  attribute :monthly_amount, Decimal
+  attribute :months, Integer
 
   ELEMENTS = ["Unfallversicherung (UV)", "Pensionsversicherung (PV)", "Krankenversicherung (KV)", "Selbständigenvorsorge (SeVo)"]
   LABELS = ["UV-Beitrag ASVG", "PV-Beitrag GSVG", "KV-Beitrag", "KV-Zusatzversicherungsbeitrag", "SeVo-Beitrag PFLICHT"]
@@ -39,9 +42,9 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
           label: label,
           period_start: period_start,
           period_end: period_end,
-          assessment_basis: assessment_basis,
-          rate: rate,
-          monthly_amount: monthly_amount,
+          assessment_basis: assessment_basis ? convert_number(assessment_basis) : nil,
+          rate: rate ? convert_number(rate) : nil,
+          monthly_amount: convert_number(monthly_amount),
           months: months,
           amount: convert_indented_amount(amount, last_line_length)
         )

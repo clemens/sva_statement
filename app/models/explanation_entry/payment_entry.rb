@@ -1,6 +1,6 @@
 class ExplanationEntry::PaymentEntry < ExplanationEntry
-  string_attributes :label
-  date_attributes :date
+  attribute :label, String
+  attribute :date, Date
 
   def self.parse_entries(content)
     entries = []

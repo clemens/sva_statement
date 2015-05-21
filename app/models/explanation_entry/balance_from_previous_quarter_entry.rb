@@ -1,5 +1,5 @@
 class ExplanationEntry::BalanceFromPreviousQuarterEntry < ExplanationEntry
-  string_attributes :label
+  attribute :label, String
 
   def self.parse_entries(content)
     date = content.string.match(/#{Explanations::DATE}/)
