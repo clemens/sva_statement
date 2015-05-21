@@ -60,6 +60,10 @@ RSpec.shared_examples "parts" do
             part.type == part_identifier &&
             part.label == expected_part_values["label"] &&
             expected_part_values["entries"].all? { |attributes|
+              if attributes.slice("period_start", "period_end").size == 2
+                attributes[:period] = Period.new(start_date: attributes.delete("period_start"), end_date: attributes.delete("period_end"))
+              end
+
               expected_entry = ExplanationEntry.const_get("#{part_identifier.singularize.camelize}Entry").new(attributes)
               entry = part.entries.detect { |entry| entry == expected_entry }
             }

@@ -1,7 +1,6 @@
 class ExplanationEntry::PrepaymentEntry < ExplanationEntry
   attribute :label, String
-  attribute :period_start, Date
-  attribute :period_end, Date
+  attribute :period, Period
   attribute :assessment_basis, Decimal
   attribute :rate, Decimal
   attribute :monthly_amount, Decimal
@@ -40,8 +39,7 @@ class ExplanationEntry::PrepaymentEntry < ExplanationEntry
 
         entries << new(
           label: label,
-          period_start: period_start,
-          period_end: period_end,
+          period: Period.new(start_date: period_start, end_date: period_end),
           assessment_basis: assessment_basis ? convert_number(assessment_basis) : nil,
           rate: rate ? convert_number(rate) : nil,
           monthly_amount: convert_number(monthly_amount),

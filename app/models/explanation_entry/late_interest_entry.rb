@@ -1,7 +1,6 @@
 class ExplanationEntry::LateInterestEntry < ExplanationEntry
   attribute :label, String
-  attribute :period_start, Date
-  attribute :period_end, Date
+  attribute :period, Period
   attribute :amount_owed, Decimal
   attribute :interest_rate, Decimal
   attribute :days, Integer
@@ -14,8 +13,7 @@ class ExplanationEntry::LateInterestEntry < ExplanationEntry
       period_start, period_end, amount_owed, interest_rate, days, label, indentation, amount = content.matched.match(regexp)[1..-1]
 
       entries << new(
-        period_start: period_start,
-        period_end: period_end,
+        period: Period.new(start_date: period_start, end_date: period_end),
         label: label,
         amount_owed: amount_owed ? convert_number(amount_owed) : nil,
         interest_rate: interest_rate ? convert_number(interest_rate) : nil,
