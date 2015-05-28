@@ -12,7 +12,7 @@ class Statement
   attr_reader :explanations
 
   def self.from_file(pdf)
-    output_filename = File.join(Dir.tmpdir, File.basename(pdf.to_s, ".pdf") + ".txt")
+    output_filename = Rails.root.join("tmp", File.basename(pdf.to_s, ".pdf") + ".txt")
     `pdftotext -enc UTF-8 -table #{pdf} #{output_filename}`
 
     new(Pathname.new(output_filename))
