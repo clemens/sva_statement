@@ -1,5 +1,7 @@
 FROM heroku/cedar:14
 
+RUN apt-get update && apt-get install -y xpdf
+
 RUN useradd -d /app -m app
 USER app
 RUN mkdir -p /app/src
