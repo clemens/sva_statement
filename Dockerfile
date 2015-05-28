@@ -1,6 +1,8 @@
 FROM heroku/cedar:14
 
-RUN apt-get update && apt-get install -y xpdf
+# build and install xpdf from source
+RUN mkdir -p /src/xpdf
+RUN curl -s ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.04.tar.gz | tar --strip-components=1 -xz -C /src/xpdf && cd /src/xpdf && ./configure && make && make install
 
 RUN useradd -d /app -m app
 USER app
