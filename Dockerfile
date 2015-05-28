@@ -38,7 +38,7 @@ ONBUILD USER root
 ONBUILD RUN chown app /app/src/Gemfile* # ensure user can modify the Gemfile.lock
 ONBUILD USER app
 
-ONBUILD RUN bundle install # TODO: desirable if --path parameter were passed
+ONBUILD RUN bundle install --deployment --without development test
 
 ONBUILD COPY . /app/src
 
@@ -52,5 +52,7 @@ ONBUILD RUN echo "export GEM_PATH=\"/app/heroku/bundler:/app/heroku/src/vendor/b
 ONBUILD RUN echo "export GEM_HOME=\"/app/src/vendor/bundle\"" >> /app/.profile.d/ruby.sh
 
 ONBUILD RUN echo "cd /app/src" >> /app/.profile.d/ruby.sh
+
+ONBUILD RUN echo $PATH && which pdftotext
 
 ONBUILD EXPOSE 3000
