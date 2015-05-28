@@ -7,7 +7,14 @@ class StatementsController < ApplicationController
         format.json { render json: statement }
       end
     else
-      head(:bad_request)
+      respond_to do |format|
+        format.json { head(:bad_request) }
+        format.html do
+          flash.now[:alert] = "Bitte laden Sie eine korrekte PDF-Datei mit einem SVA-Kontoauszug hoch!"
+
+          render :upload, status: :bad_request
+        end
+      end
     end
   end
 end
