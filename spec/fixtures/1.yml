@@ -2,6 +2,7 @@
 "social_security_number" : "0001 020202"
 "year" : 2015
 "quarter" : 2
+"deferred_payment_negotiated" : true
 "account_balance_overview" :
   "balance_from_previous_quarters" :
     "amount" : -13.44

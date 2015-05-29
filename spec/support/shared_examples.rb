@@ -17,6 +17,10 @@ RSpec.shared_examples "general data" do
       expect(statement.quarter).to eq values["quarter"]
     end
 
+    it "determines whether or not deferred payment has been negotiated" do
+      expect(statement.deferred_payment_negotiated?).to eq values["deferred_payment_negotiated"]
+    end
+
     describe "Account balance overview" do
       context "balance from previous quarters" do
         let(:scoped_values) { values["account_balance_overview"]["balance_from_previous_quarters"] }

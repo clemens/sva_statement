@@ -2,7 +2,7 @@ class Statement
   extend Forwardable
 
   def_delegators :@overview_page,
-    :year, :quarter,
+    :year, :quarter, :deferred_payment_negotiated?,
     :balance_from_previous_quarters_amount, :balance_from_previous_quarters_entries,
     :prepayment_amount, :prepayment_entries
 
@@ -48,6 +48,7 @@ class Statement
       social_security_number: social_security_number,
       year: year,
       quarter: quarter,
+      deferred_payment_negotiated: deferred_payment_negotiated?,
       account_balance_overview: account_balance_overview,
     }
   end

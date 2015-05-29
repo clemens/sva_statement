@@ -39,6 +39,13 @@ class OverviewPage
     quarter_and_year[:year].to_i
   end
 
+  def deferred_payment_negotiated?
+    start_index = @contents.index("Offener Betrag aus Vorquartalen")
+    end_index = @contents.index("Gesamtsumme")
+
+    @contents.slice(start_index..end_index).include?("Ratenzahlung vereinbart")
+  end
+
   private
 
   def read_entries(contents)

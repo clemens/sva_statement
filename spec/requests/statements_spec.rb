@@ -20,6 +20,7 @@ RSpec.describe "Statements API", type: :request do
         expect(statement["social_security_number"]).to eq "0001 020202"
         expect(statement["year"]).to eq 2015
         expect(statement["quarter"]).to eq 2
+        expect(statement["deferred_payment_negotiated"]).to eq true
 
         # account balance overview
         balance_from_previous_quarters = statement["account_balance_overview"]["balance_from_previous_quarters"]
