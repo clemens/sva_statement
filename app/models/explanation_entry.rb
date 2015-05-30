@@ -1,5 +1,5 @@
 class ExplanationEntry < Entry
   def as_json(*args)
-    attributes
+    attributes.except('period')
   end
 end
