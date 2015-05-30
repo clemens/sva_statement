@@ -5,7 +5,7 @@ RSpec.describe "Statements API", type: :request do
     let(:headers) { { "HTTP_ACCEPT" => "application/json" } }
 
     context "when given a PDF file" do
-      it "evaluates the given PDF file" do
+      it "evaluates the given PDF file (1.pdf)" do
         data = YAML.load_file(fixture("1.yml"))
         params = { file: file_from(fixture("1.pdf"), "application/pdf") }
 
@@ -35,6 +35,45 @@ RSpec.describe "Statements API", type: :request do
         expect(prepayment["entries"][1]["amount"]).to eq -3.57
         expect(prepayment["entries"][2]["label"]).to eq "Berichtigung 2015"
         expect(prepayment["entries"][2]["amount"]).to eq 430.50
+
+        # explanations
+        parts = statement["explanations"]["parts"]
+
+        balance_from_previous_quarters = parts.detect { |part| part["type"] == "balance_from_previous_quarters" }
+        expect(balance_from_previous_quarters["entries"][0]["label"]).to eq "letzter Vorschreibebetrag"
+        expect(balance_from_previous_quarters["entries"][0]["amount"]).to eq -13.44
+
+        # TODO period start and end
+        prepayment = parts.detect { |part| part["type"] == "prepayment" }
+        accident_insurance = prepayment["entries"][0]
+        expect(accident_insurance["label"]).to eq "UV-Beitrag ASVG"
+        expect(accident_insurance["monthly_amount"]).to eq 8.90
+        expect(accident_insurance["months"]).to eq 3
+        expect(accident_insurance["amount"]).to eq -26.70
+
+        retirement_pension_insurance = prepayment["entries"][1]
+        expect(retirement_pension_insurance["label"]).to eq "PV-Beitrag GSVG"
+        expect(retirement_pension_insurance["assessment_basis"]).to eq 537.78
+        expect(retirement_pension_insurance["rate"]).to eq 18.50
+        expect(retirement_pension_insurance["monthly_amount"]).to eq 99.49
+        expect(retirement_pension_insurance["months"]).to eq 3
+        expect(retirement_pension_insurance["amount"]).to eq -298.47
+
+        health_insurance = prepayment["entries"][2]
+        expect(health_insurance["label"]).to eq "KV-Beitrag"
+        expect(health_insurance["assessment_basis"]).to eq 537.78
+        expect(health_insurance["rate"]).to eq 7.65
+        expect(health_insurance["monthly_amount"]).to eq 41.14
+        expect(health_insurance["months"]).to eq 3
+        expect(health_insurance["amount"]).to eq -123.42
+
+        required_sevo = prepayment["entries"][3]
+        expect(required_sevo["label"]).to eq "SeVo-Beitrag PFLICHT"
+        expect(required_sevo["assessment_basis"]).to eq 537.78
+        expect(required_sevo["rate"]).to eq 1.53
+        expect(required_sevo["monthly_amount"]).to eq 8.23
+        expect(required_sevo["months"]).to eq 3
+        expect(required_sevo["amount"]).to eq -24.69
       end
     end
 

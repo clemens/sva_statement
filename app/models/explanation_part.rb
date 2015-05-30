@@ -36,4 +36,12 @@ class ExplanationPart
       @entries = []
     end
   end
+
+  def as_json(*)
+    {
+      type: type,
+      label: label,
+      entries: entries.map(&:as_json),
+    }
+  end
 end

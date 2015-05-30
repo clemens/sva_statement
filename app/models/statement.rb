@@ -43,6 +43,8 @@ class Statement
       }
     }
 
+    explanations = { parts: @explanations.parts.map(&:as_json) }
+
     {
       name: name,
       social_security_number: social_security_number,
@@ -50,6 +52,7 @@ class Statement
       quarter: quarter,
       deferred_payment_negotiated: deferred_payment_negotiated?,
       account_balance_overview: account_balance_overview,
+      explanations: explanations,
     }
   end
 end
