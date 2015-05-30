@@ -1,4 +1,5 @@
 class ExplanationEntry::CollectionExpenseEntry < ExplanationEntry
+  attribute :date, Date
   attribute :label, String
 
   def self.parse_entries(content)
