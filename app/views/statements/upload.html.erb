@@ -1,4 +1,4 @@
-<%= form_tag parse_statement_path(:json), multipart: true do %>
+<%= form_tag parse_statement_path(:json), multipart: true, authenticity_token: false do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Hochladen" %>
 <% end %>
